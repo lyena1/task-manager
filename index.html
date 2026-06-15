@@ -2116,7 +2116,7 @@
             let thisWeekTasks = [];
             let futureTasks = [];
             if (currentTab === 'current') {
-                thisWeekTasks = sorted.filter(t => isInWeek(t.deadline, 0) || new Date(t.deadline) < new Date());
+            thisWeekTasks = sorted.filter(t => isInWeek(t.deadline, 0));
                 futureTasks = sorted.filter(t => isAfterWeek(t.deadline, 0));
             } else {
                 thisWeekTasks = sorted;
@@ -2201,7 +2201,7 @@
             let filteredTasks = [];
             if (currentTab === 'current') {
                 filteredTasks = tasks.filter(t => {
-                    return isInWeek(t.deadline, 0) || isAfterWeek(t.deadline, 0) || new Date(t.deadline) < new Date();
+                    return isInWeek(t.deadline, 0) || isAfterWeek(t.deadline, 0);
                 });
                 document.getElementById('sectionTitleText').textContent = '本周工作';
             } else if (currentTab === 'next') {
@@ -2239,7 +2239,7 @@
         function updateStats() {
             let relevantTasks = [];
             if (currentTab === 'current') {
-                relevantTasks = tasks.filter(t => !isAfterWeek(t.deadline, 0) || new Date(t.deadline) < new Date());
+                relevantTasks = tasks.filter(t => isInWeek(t.deadline, 0) || isAfterWeek(t.deadline, 0));
             } else if (currentTab === 'next') {
                 relevantTasks = tasks.filter(t => isInWeek(t.deadline, 1));
             } else {
