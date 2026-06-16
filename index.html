@@ -209,16 +209,16 @@
 
         /* ===== Reminder Banner ===== */
         .reminder-banner {
-            background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+            background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
             border-radius: var(--radius);
             padding: 16px 22px;
             margin-bottom: 20px;
             display: none;
             align-items: center; gap: 14px;
-            border: 1px solid #FFD54F;
-            border-left: 5px solid var(--warning);
+            border: 1px solid #FF9800;
+            border-left: 5px solid #E65100;
             animation: slideDown 0.4s ease;
-            box-shadow: 0 4px 16px rgba(255, 213, 79, 0.15);
+            box-shadow: 0 4px 16px rgba(230, 81, 0, 0.12);
         }
         .reminder-banner.show { display: flex; }
         @keyframes slideDown {
@@ -235,13 +235,13 @@
         .reminder-title { font-weight: 700; font-size: 0.9rem; color: #E65100; margin-bottom: 2px; }
         .reminder-list { font-size: 0.85rem; color: #BF360C; }
         .reminder-close {
-            background: rgba(255, 213, 79, 0.3);
+            background: rgba(230, 81, 0, 0.12);
             border: none; width: 30px; height: 30px;
             border-radius: var(--radius-xs);
             cursor: pointer; color: #E65100; font-size: 1rem;
             transition: background 0.2s;
         }
-        .reminder-close:hover { background: rgba(255, 213, 79, 0.5); }
+        .reminder-close:hover { background: rgba(230, 81, 0, 0.22); }
 
         /* ===== Tabs ===== */
         .tabs {
@@ -302,11 +302,11 @@
             position: absolute; top: 0; left: 0; right: 0;
             height: 4px;
         }
-        .stat-card.total::before { background: linear-gradient(90deg, #81D4FA, #7EC8A4); }
-        .stat-card.urgent::before { background: linear-gradient(90deg, #FF9A8B, #FF8A80); }
-        .stat-card.today::before { background: linear-gradient(90deg, #FFD89E, #FFD54F); }
-        .stat-card.progress::before { background: linear-gradient(90deg, #CE93D8, #81D4FA); }
-        .stat-card.completed::before { background: linear-gradient(90deg, #A5D6A7, #7EC8A4); }
+        .stat-card.total::before { background: linear-gradient(90deg, #0288D1, #42A5F5); }
+        .stat-card.urgent::before { background: linear-gradient(90deg, #E53935, #FF5252); }
+        .stat-card.today::before { background: linear-gradient(90deg, #E65100, #FF9800); }
+        .stat-card.progress::before { background: linear-gradient(90deg, #7B1FA2, #AB47BC); }
+        .stat-card.completed::before { background: linear-gradient(90deg, #2E7D32, #43A047); }
         .stat-card:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow-md);
@@ -318,11 +318,11 @@
         .stat-label { font-size: 0.8rem; color: var(--gray-500); font-weight: 500; }
         .stat-icon { font-size: 1.2rem; }
         .stat-number { font-size: 2rem; font-weight: 800; line-height: 1; }
-        .stat-card.total .stat-number { color: #81D4FA; }
-        .stat-card.urgent .stat-number { color: #FF8A80; }
-        .stat-card.today .stat-number { color: #FFD54F; }
-        .stat-card.progress .stat-number { color: #CE93D8; }
-        .stat-card.completed .stat-number { color: #7EC8A4; }
+        .stat-card.total .stat-number { color: #0288D1; }
+        .stat-card.urgent .stat-number { color: #E53935; }
+        .stat-card.today .stat-number { color: #E65100; }
+        .stat-card.progress .stat-number { color: #7B1FA2; }
+        .stat-card.completed .stat-number { color: #2E7D32; }
 
         /* ===== Main Layout ===== */
         .main-content {
@@ -427,37 +427,37 @@
         tbody tr:last-child td { border-bottom: none; }
 
         tr.urgent-row {
-            background: rgba(255, 138, 128, 0.06);
+            background: rgba(229, 57, 53, 0.06);
         }
         tr.urgent-row:hover {
-            background: rgba(255, 138, 128, 0.10);
+            background: rgba(229, 57, 53, 0.10);
         }
         tr.completed-row { opacity: 0.6; }
         tr.future-row { background: rgba(206, 147, 216, 0.04); }
 
         /* Group Header */
         .project-group-header {
-            background: linear-gradient(90deg, rgba(126, 200, 164, 0.08), rgba(126, 200, 164, 0.03));
+            background: linear-gradient(90deg, rgba(2, 136, 209, 0.06), rgba(2, 136, 209, 0.02));
         }
         .project-group-header td { padding: 10px 14px; border-bottom: 1px solid var(--gray-200); }
         .project-title {
             display: flex; align-items: center; gap: 8px;
-            font-weight: 600; color: var(--primary-dark);
+            font-weight: 600; color: #0277BD;
         }
         .project-stats {
             font-size: 0.75rem; font-weight: 500;
-            color: var(--primary); margin-left: auto;
+            color: #0288D1; margin-left: auto;
         }
 
         /* Week Divider */
         .week-divider td {
             padding: 6px 14px;
-            background: linear-gradient(90deg, rgba(206, 147, 216, 0.06), rgba(129, 212, 250, 0.04));
+            background: linear-gradient(90deg, rgba(123,31,162,0.06), rgba(2,136,209,0.04));
             border-bottom: 1px solid var(--gray-200);
         }
         .week-divider-text {
             font-size: 0.75rem; font-weight: 600;
-            color: var(--purple);
+            color: #7B1FA2;
             display: flex; align-items: center; gap: 6px;
         }
 
@@ -469,11 +469,12 @@
             cursor: default;
         }
         .task-project-tag {
-            font-size: 0.7rem; color: var(--gray-400); margin-top: 2px;
+            font-size: 0.7rem; color: #546E7A; margin-top: 2px;
+            font-weight: 600;
         }
         .task-time-tag {
-            font-size: 0.7rem; color: #81D4FA; margin-top: 1px;
-            font-weight: 500;
+            font-size: 0.7rem; color: #0288D1; margin-top: 1px;
+            font-weight: 600;
         }
 
         /* Badges */
@@ -491,33 +492,33 @@
         .status-badge::before {
             content: ''; width: 6px; height: 6px; border-radius: 50%;
         }
-        .status-pending { background: rgba(158, 158, 158, 0.10); color: #757575; }
-        .status-pending::before { background: #BDBDBD; }
-        .status-progress { background: rgba(129, 212, 250, 0.15); color: #0277BD; }
-        .status-progress::before { background: #81D4FA; animation: pulse 1.5s infinite; }
-        .status-review { background: rgba(206, 147, 216, 0.15); color: #7B1FA2; }
-        .status-review::before { background: #CE93D8; }
-        .status-completed { background: rgba(126, 200, 164, 0.15); color: #2E7D32; }
-        .status-completed::before { background: #A5D6A7; }
-        .status-delayed { background: rgba(255, 138, 128, 0.15); color: #C62828; }
-        .status-delayed::before { background: #FF8A80; animation: pulse 1.5s infinite; }
+        .status-pending { background: rgba(117,117,117,0.12); color: #616161; }
+        .status-pending::before { background: #9E9E9E; }
+        .status-progress { background: rgba(2,136,209,0.12); color: #01579B; }
+        .status-progress::before { background: #0288D1; animation: pulse 1.5s infinite; }
+        .status-review { background: rgba(123,31,162,0.12); color: #6A1B9A; }
+        .status-review::before { background: #9C27B0; }
+        .status-completed { background: rgba(46,125,50,0.12); color: #1B5E20; }
+        .status-completed::before { background: #43A047; }
+        .status-delayed { background: rgba(211,47,47,0.12); color: #B71C1C; }
+        .status-delayed::before { background: #E53935; animation: pulse 1.5s infinite; }
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.4; }
         }
 
-        .priority-high { color: #FF8A80; font-weight: 700; }
-        .priority-medium { color: #FFD54F; font-weight: 600; }
-        .priority-low { color: #A5D6A7; }
+        .priority-high { color: #E53935; font-weight: 700; text-shadow: 0 0 8px rgba(229,57,53,0.25); }
+        .priority-medium { color: #F57C00; font-weight: 700; }
+        .priority-low { color: #43A047; }
 
         /* Date */
         .date-cell { display: flex; flex-direction: column; gap: 1px; }
         .date-main { font-size: 0.85rem; color: var(--gray-700); font-weight: 500; }
         .date-relative { font-size: 0.7rem; color: var(--gray-400); }
         .date-overdue .date-main, .date-overdue .date-relative {
-            color: var(--danger); font-weight: 700;
+            color: #D32F2F; font-weight: 700;
         }
-        .date-urgent .date-main { color: var(--warning); }
+        .date-urgent .date-main { color: #E65100; font-weight: 600; }
 
         /* Progress */
         .progress-wrapper { display: flex; align-items: center; gap: 8px; }
@@ -528,12 +529,12 @@
         }
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--cyan));
+            background: linear-gradient(90deg, #0288D1, #42A5F5);
             border-radius: 3px;
             transition: width 0.4s ease;
         }
         .progress-fill.complete {
-            background: linear-gradient(90deg, var(--success), var(--cyan));
+            background: linear-gradient(90deg, #2E7D32, #43A047);
         }
         .progress-text {
             font-size: 0.75rem; color: var(--gray-500); min-width: 34px;
@@ -543,7 +544,7 @@
         /* Time Cost */
         .time-cost {
             display: inline-flex; align-items: center; gap: 4px;
-            font-size: 0.75rem; font-weight: 500; color: #81D4FA;
+            font-size: 0.75rem; font-weight: 600; color: #0288D1;
         }
 
         /* Actions */
@@ -683,7 +684,7 @@
             display: flex; align-items: center; gap: 6px;
         }
         .sidebar-badge {
-            background: rgba(255, 138, 128, 0.15);
+            background: rgba(229, 57, 53, 0.12);
             color: #C62828;
             padding: 2px 8px; border-radius: 10px;
             font-size: 0.7rem; font-weight: 700;
@@ -705,12 +706,12 @@
             transform: translateX(4px);
         }
         .deadline-item.urgent {
-            background: rgba(255, 138, 128, 0.06);
-            border-left: 3px solid #FF8A80;
+            background: rgba(229, 57, 53, 0.06);
+            border-left: 3px solid #E53935;
         }
         .deadline-item.warning {
-            background: rgba(255, 216, 158, 0.12);
-            border-left: 3px solid var(--warning);
+            background: rgba(230, 81, 0, 0.06);
+            border-left: 3px solid #E65100;
         }
         .deadline-icon { font-size: 1rem; }
         .deadline-info { flex: 1; min-width: 0; }
@@ -718,13 +719,13 @@
             font-size: 0.8rem; font-weight: 500; color: var(--gray-800);
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
-        .deadline-project { font-size: 0.7rem; color: var(--gray-400); margin-top: 2px; }
+        .deadline-project { font-size: 0.7rem; color: #546E7A; margin-top: 2px; font-weight: 500; }
         .deadline-time {
             font-size: 0.7rem; font-weight: 500;
             color: var(--gray-500); white-space: nowrap;
         }
-        .deadline-item.urgent .deadline-time { color: #FF8A80; }
-        .deadline-item.warning .deadline-time { color: var(--warning); }
+        .deadline-item.urgent .deadline-time { color: #E53935; font-weight: 700; }
+        .deadline-item.warning .deadline-time { color: #E65100; font-weight: 600; }
         .empty-sidebar {
             text-align: center; padding: 20px 12px;
             color: var(--gray-400); font-size: 0.8rem;
@@ -765,7 +766,7 @@
             background: rgba(126, 200, 164, 0.08);
             border-radius: var(--radius-sm);
         }
-        .archive-stat-value { font-size: 1.4rem; font-weight: 700; color: var(--primary); }
+        .archive-stat-value { font-size: 1.4rem; font-weight: 700; color: #0288D1; }
         .archive-stat-label { font-size: 0.7rem; color: var(--gray-500); }
 
         /* Stats Visualization */
@@ -809,12 +810,12 @@
             font-size: 0.68rem; font-weight: 700; color: white;
             min-width: 28px;
         }
-        .bar-fill.cat-store { background: linear-gradient(90deg, #0277BD, #81D4FA); }
-        .bar-fill.cat-abtest { background: linear-gradient(90deg, #7B1FA2, #CE93D8); }
-        .bar-fill.cat-data { background: linear-gradient(90deg, #2E7D32, #A5D6A7); }
-        .bar-fill.cat-version { background: linear-gradient(90deg, #E65100, #FFD89E); }
-        .bar-fill.cat-monetization { background: linear-gradient(90deg, #C62828, #FF9A8B); }
-        .bar-fill.cat-other { background: linear-gradient(90deg, #5D4037, #BCAAA4); }
+        .bar-fill.cat-store { background: linear-gradient(90deg, #01579B, #42A5F5); }
+        .bar-fill.cat-abtest { background: linear-gradient(90deg, #4A148C, #AB47BC); }
+        .bar-fill.cat-data { background: linear-gradient(90deg, #1B5E20, #43A047); }
+        .bar-fill.cat-version { background: linear-gradient(90deg, #BF360C, #FF9800); }
+        .bar-fill.cat-monetization { background: linear-gradient(90deg, #B71C1C, #EF5350); }
+        .bar-fill.cat-other { background: linear-gradient(90deg, #37474F, #78909C); }
 
         /* Donut Chart (CSS) */
         .donut-container {
@@ -829,7 +830,7 @@
             transform: translate(-50%, -50%);
             text-align: center;
         }
-        .donut-center-value { font-size: 1.4rem; font-weight: 800; color: var(--primary); }
+        .donut-center-value { font-size: 1.4rem; font-weight: 800; color: #0288D1; }
         .donut-center-label { font-size: 0.7rem; color: var(--gray-500); }
         .donut-legend { display: flex; flex-direction: column; gap: 6px; }
         .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; }
@@ -851,10 +852,10 @@
             position: relative;
         }
         .timeline-seg:hover { opacity: 0.8; }
-        .timeline-seg.seg-completed { background: var(--primary); }
-        .timeline-seg.seg-progress { background: #81D4FA; }
-        .timeline-seg.seg-pending { background: var(--gray-300); }
-        .timeline-seg.seg-delayed { background: #FF8A80; }
+        .timeline-seg.seg-completed { background: #2E7D32; }
+        .timeline-seg.seg-progress { background: #0288D1; }
+        .timeline-seg.seg-pending { background: #9E9E9E; }
+        .timeline-seg.seg-delayed { background: #E53935; }
 
         /* Summary Cards */
         .summary-row {
@@ -872,10 +873,10 @@
         .summary-card .s-icon { font-size: 1.6rem; margin-bottom: 6px; }
         .summary-card .s-value { font-size: 1.8rem; font-weight: 800; }
         .summary-card .s-label { font-size: 0.72rem; color: var(--gray-500); margin-top: 2px; }
-        .summary-card.s-total .s-value { color: #81D4FA; }
-        .summary-card.s-done .s-value { color: var(--primary); }
-        .summary-card.s-rate .s-value { color: var(--success); }
-        .summary-card.s-time .s-value { color: var(--purple); }
+        .summary-card.s-total .s-value { color: #0288D1; }
+        .summary-card.s-done .s-value { color: #2E7D32; }
+        .summary-card.s-rate .s-value { color: #E65100; }
+        .summary-card.s-time .s-value { color: #7B1FA2; }
 
         /* Period Selector */
         .period-selector {
@@ -1007,14 +1008,14 @@
         }
         .category-config-item .remove-cat-btn {
             width: 28px; height: 28px;
-            border: none; background: rgba(255, 138, 128, 0.12);
+            border: none; background: rgba(229, 57, 53, 0.10);
             border-radius: 8px;
-            cursor: pointer; color: #FF8A80; font-size: 0.9rem;
+            cursor: pointer; color: #E53935; font-size: 0.9rem;
             display: flex; align-items: center; justify-content: center;
             transition: all 0.15s;
             flex-shrink: 0;
         }
-        .category-config-item .remove-cat-btn:hover { background: rgba(255, 138, 128, 0.25); transform: scale(1.1); }
+        .category-config-item .remove-cat-btn:hover { background: rgba(229, 57, 53, 0.20); transform: scale(1.1); }
         .add-category-btn {
             width: 100%; padding: 10px;
             border: 2px dashed var(--primary-light);
@@ -1040,12 +1041,12 @@
         }
         .role-config-item input { flex: 1; padding: 8px 12px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 0.85rem; }
         .role-config-item .remove-role-btn {
-            width: 28px; height: 28px; border: none; background: rgba(255, 138, 128, 0.12);
-            border-radius: 8px; cursor: pointer; color: #FF8A80; font-size: 0.9rem;
+            width: 28px; height: 28px; border: none; background: rgba(229, 57, 53, 0.10);
+            border-radius: 8px; cursor: pointer; color: #E53935; font-size: 0.9rem;
             display: flex; align-items: center; justify-content: center;
             transition: all 0.15s;
         }
-        .role-config-item .remove-role-btn:hover { background: rgba(255, 138, 128, 0.25); }
+        .role-config-item .remove-role-btn:hover { background: rgba(229, 57, 53, 0.20); }
         .add-role-btn {
             width: 100%; padding: 10px; border: 2px dashed var(--purple);
             border-radius: 10px; background: transparent;
@@ -1072,10 +1073,10 @@
             from { opacity: 0; transform: translateX(16px); }
             to { opacity: 1; transform: translateX(0); }
         }
-        .toast.success { border-color: var(--primary); }
-        .toast.warning { border-color: var(--warning); }
-        .toast.error { border-color: #FF8A80; }
-        .toast.info { border-color: #81D4FA; }
+        .toast.success { border-color: #2E7D32; }
+        .toast.warning { border-color: #E65100; }
+        .toast.error { border-color: #C62828; }
+        .toast.info { border-color: #0277BD; }
         .toast-message { font-size: 0.85rem; color: var(--gray-700); font-weight: 500; }
 
         /* ===== Empty State ===== */
@@ -1182,7 +1183,7 @@
         .streak-badge {
             display: inline-flex; align-items: center; gap: 4px;
             padding: 4px 10px; border-radius: 12px;
-            background: linear-gradient(135deg, rgba(255, 216, 158, 0.20), rgba(255, 213, 79, 0.15));
+            background: linear-gradient(135deg, rgba(230, 81, 0, 0.12), rgba(255, 152, 0, 0.10));
             font-size: 0.72rem; font-weight: 700; color: #E65100;
         }
 
@@ -1330,6 +1331,7 @@
                 </div>
                 <div class="filters-row" id="filtersRow">
                     <select id="filterProject"><option value="">全部项目</option></select>
+                    <button class="settings-btn" onclick="openProjectConfig()" title="管理项目选项" style="padding:6px 10px;font-size:0.75rem;">📁 项目管理</button>
                     <select id="filterCategory"><option value="">全部类型</option></select>
                     <select id="filterStatus">
                         <option value="">全部状态</option>
@@ -1446,12 +1448,17 @@
                     <input type="hidden" id="taskId">
                     <div class="form-row">
                         <div class="form-group">
-                            <label>任务名称 <span style="color:#FF8A80;">*</span></label>
+                            <label>任务名称 <span style="color:#E53935;">*</span></label>
                             <input type="text" id="taskName" required placeholder="输入任务名称">
                         </div>
                         <div class="form-group">
                             <label>项目名称<span class="optional">(选填)</span></label>
-                            <input type="text" id="projectName" placeholder="留空为个人任务">
+                            <div style="display:flex;gap:6px;align-items:center;">
+                                <select id="projectName" style="flex:1;">
+                                    <option value="">个人任务</option>
+                                </select>
+                                <button type="button" class="settings-btn" onclick="openProjectConfig()" title="管理项目选项" style="flex-shrink:0;padding:8px 10px;">⚙️</button>
+                            </div>
                         </div>
                     </div>
                     <div class="form-row-3">
@@ -1480,7 +1487,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label>截止日期 <span style="color:#FF8A80;">*</span></label>
+                            <label>截止日期 <span style="color:#E53935;">*</span></label>
                             <input type="date" id="deadline" required>
                         </div>
                         <div class="form-group">
@@ -1577,6 +1584,26 @@
         </div>
     </div>
 
+    <!-- Project Config Modal -->
+    <div class="modal-overlay" id="projectConfigOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>📁 项目选项管理</h2>
+                <button class="modal-close" onclick="closeProjectConfig()">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="category-config-list" id="projectConfigList"></div>
+                <button class="add-category-btn" style="border-color:var(--orange);color:#E65100;" onclick="addProjectRow()">+ 添加新项目</button>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeProjectConfig()">取消</button>
+                <button class="btn btn-primary" onclick="saveProjectConfig()">保存配置</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
@@ -1589,12 +1616,12 @@
     <script>
         // ===== Default Categories (migrated from old) =====
         const defaultCategories = [
-            { key: 'store', label: '商店运营', icon: '🏪', color: '#81D4FA' },
-            { key: 'abtest', label: 'AB测试', icon: '🧪', color: '#CE93D8' },
-            { key: 'data', label: '数据分析', icon: '📊', color: '#7EC8A4' },
-            { key: 'version', label: '版本运营', icon: '🚀', color: '#FFD89E' },
-            { key: 'monetization', label: '商业化运营', icon: '💰', color: '#FF9A8B' },
-            { key: 'other', label: '其他', icon: '📌', color: '#BCAAA4' }
+            { key: 'store', label: '商店运营', icon: '🏪', color: '#1565C0' },
+            { key: 'abtest', label: 'AB测试', icon: '🧪', color: '#6A1B9A' },
+            { key: 'data', label: '数据分析', icon: '📊', color: '#2E7D32' },
+            { key: 'version', label: '版本运营', icon: '🚀', color: '#D84315' },
+            { key: 'monetization', label: '商业化运营', icon: '💰', color: '#C62828' },
+            { key: 'other', label: '其他', icon: '📌', color: '#546E7A' }
         ];
 
         const defaultRoles = [
@@ -1607,6 +1634,12 @@
             '项目经理',
             '数据分析师',
             '设计师'
+        ];
+
+        const defaultProjects = [
+            { key: 'project_alpha', label: 'Project Alpha', icon: '🚀', color: '#42A5F5' },
+            { key: 'project_beta', label: 'Project Beta', icon: '🎯', color: '#EF5350' },
+            { key: 'project_gamma', label: 'Project Gamma', icon: '💎', color: '#AB47BC' }
         ];
 
         const statusLabels = {
@@ -1636,6 +1669,7 @@
         let archives = {};
         let categories = [];
         let roles = [];
+        let projects = [];
         let currentRole = '';
         let soundEnabled = true;
         let archivePeriod = 'month';
@@ -1657,6 +1691,27 @@
         function generateCategoryKey(label) {
             let key = label.toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]/g, '_');
             if (!key || key === '_') key = 'cat_' + Date.now();
+            return key;
+        }
+
+        // ===== Helper: Get projects with backward compat =====
+        function getProjects() {
+            return projects.length > 0 ? projects : defaultProjects;
+        }
+
+        function getProjectInfo(key) {
+            const projs = getProjects();
+            const found = projs.find(p => p.key === key);
+            if (found) return found;
+            // Try to match by label (for backward compat with old text-based project names)
+            const byLabel = projs.find(p => p.label === key);
+            if (byLabel) return byLabel;
+            return { key, label: key, icon: '📁', color: '#78909C' };
+        }
+
+        function generateProjectKey(label) {
+            let key = label.toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]/g, '_');
+            if (!key || key === '_') key = 'proj_' + Date.now();
             return key;
         }
 
@@ -1697,7 +1752,7 @@
         function createConfetti() {
             const overlay = document.getElementById('celebrationOverlay');
             overlay.innerHTML = '';
-            const colors = ['#7EC8A4', '#FFD54F', '#FF9A8B', '#81D4FA', '#CE93D8', '#A5D6A7', '#FFD89E', '#FF8A80'];
+            const colors = ['#2E7D32', '#FF9800', '#E53935', '#0288D1', '#7B1FA2', '#43A047', '#F57C00', '#FF5252'];
             for (let i = 0; i < 60; i++) {
                 const c = document.createElement('div');
                 c.className = 'confetti';
@@ -2033,6 +2088,7 @@
             const urgent = isUrgent(task.deadline, task.status);
             const overdue = new Date(task.deadline) < new Date() && task.status !== 'completed';
             const catInfo = getCategoryInfo(task.category);
+            const projInfo = getProjectInfo(task.projectName);
             const hasProject = task.projectName && task.projectName.trim() !== '';
             const isCompleted = task.status === 'completed';
             const timeStr = formatTimeCost(task.timeCost, task.timeUnit);
@@ -2045,10 +2101,10 @@
                             onmouseenter="showTooltip(event, ${task.id})"
                             onmouseleave="hideTooltip()">
                             <div class="task-name">
-                                ${task.priority === 'high' ? '<span style="color:#FF8A80;">🔥</span>' : ''}
+                                ${task.priority === 'high' ? '<span style="color:#FF5252;">🔥</span>' : ''}
                                 ${task.taskName}
                             </div>
-                            ${showProject && hasProject ? `<div class="task-project-tag">📁 ${task.projectName}</div>` : ''}
+                            ${showProject && hasProject ? `<div class="task-project-tag" style="color:${projInfo.color};font-weight:600;">${projInfo.icon} ${task.projectName}</div>` : ''}
                             ${timeStr ? `<div class="task-time-tag">⏱ ${timeStr}</div>` : ''}
                             <div class="task-tooltip" id="tooltip-${task.id}"></div>
                         </div>
@@ -2084,14 +2140,15 @@
             const task = tasks.find(t => t.id === taskId);
             if (!task) return;
             const catInfo = getCategoryInfo(task.category);
+            const projInfo = getProjectInfo(task.projectName);
             const tip = document.getElementById(`tooltip-${taskId}`);
             if (!tip) return;
             const timeStr = formatTimeCost(task.timeCost, task.timeUnit);
             tip.innerHTML = `
                 <div class="tooltip-header">${task.priority === 'high' ? '🔥 ' : ''}${task.taskName}</div>
-                <div class="tooltip-row"><span class="tooltip-label">项目</span><span class="tooltip-value">${task.projectName || '个人任务'}</span></div>
-                <div class="tooltip-row"><span class="tooltip-label">类型</span><span class="tooltip-value">${catInfo.icon} ${catInfo.label}</span></div>
-                <div class="tooltip-row"><span class="tooltip-label">优先级</span><span class="tooltip-value">${priorityLabels[task.priority]}</span></div>
+                <div class="tooltip-row"><span class="tooltip-label">项目</span><span class="tooltip-value" style="color:${projInfo.color};font-weight:500;">${projInfo.icon} ${task.projectName || '个人任务'}</span></div>
+                <div class="tooltip-row"><span class="tooltip-label">类型</span><span class="tooltip-value" style="color:${catInfo.color};">${catInfo.icon} ${catInfo.label}</span></div>
+                <div class="tooltip-row"><span class="tooltip-label">优先级</span><span class="tooltip-value" style="color:${task.priority === 'high' ? '#E53935' : task.priority === 'medium' ? '#F57C00' : '#43A047'};font-weight:600;">${priorityLabels[task.priority]}</span></div>
                 <div class="tooltip-row"><span class="tooltip-label">进度</span><span class="tooltip-value">${task.progress}%</span></div>
                 <div class="tooltip-row"><span class="tooltip-label">截止</span><span class="tooltip-value">${formatDate(task.deadline)} (${getRelativeTime(task.deadline)})</span></div>
                 <div class="tooltip-row"><span class="tooltip-label">状态</span><span class="tooltip-value">${statusLabels[task.status]}</span></div>
@@ -2155,7 +2212,8 @@
                 const total = projectTasks.length;
                 const completed = projectTasks.filter(t => t.status === 'completed').length;
                 const urgentCount = projectTasks.filter(t => isUrgent(t.deadline, t.status) && t.status !== 'completed').length;
-                html += `<tr class="project-group-header"><td colspan="8"><div class="project-title"><span>${name === '个人任务' ? '📌' : '📁'}</span><span>${name}</span><span class="project-stats">${completed}/${total} 完成${urgentCount > 0 ? ` · 🔥${urgentCount}` : ''}</span></div></td></tr>`;
+                const projInfo = name === '个人任务' ? { icon: '📌', color: '#0277BD' } : getProjectInfo(name);
+                html += `<tr class="project-group-header" style="background:linear-gradient(90deg, ${projInfo.color}0F, ${projInfo.color}05);"><td colspan="8"><div class="project-title" style="color:${projInfo.color};"><span>${projInfo.icon}</span><span>${name}</span><span class="project-stats" style="color:${projInfo.color};">${completed}/${total} 完成${urgentCount > 0 ? ` · 🔥${urgentCount}` : ''}</span></div></td></tr>`;
                 html += projectTasks.map(t => buildTaskRow(t, false)).join('');
             });
             tbody.innerHTML = html;
@@ -2220,8 +2278,10 @@
             const priority = document.getElementById('filterPriority').value;
             const search = document.getElementById('searchInput').value.toLowerCase();
             filteredTasks = filteredTasks.filter(task => {
-                const taskProject = task.projectName && task.projectName.trim() !== '' ? task.projectName : '个人任务';
-                return (!project || taskProject === project) &&
+                const taskProject = task.projectName && task.projectName.trim() !== '' ? task.projectName : '';
+                const projInfo = getProjectInfo(taskProject);
+                const taskProjectKey = projInfo.key;
+                return (!project || taskProject === project || taskProjectKey === project) &&
                        (!category || task.category === category) &&
                        (!status || task.status === status) &&
                        (!priority || task.priority === priority) &&
@@ -2277,12 +2337,13 @@
             } else {
                 urgentList.innerHTML = urgentTasks.slice(0, 5).map(t => {
                     const name = t.projectName && t.projectName.trim() !== '' ? t.projectName : '个人任务';
+                    const projInfo = getProjectInfo(t.projectName);
                     const timeStr = formatTimeCost(t.timeCost, t.timeUnit);
                     return `<div class="deadline-item ${new Date(t.deadline) < today ? 'urgent' : 'warning'}" onclick="editTask(${t.id})">
                         <div class="deadline-icon">${getCategoryInfo(t.category).icon}</div>
                         <div class="deadline-info">
                             <div class="deadline-task">${t.taskName}</div>
-                            <div class="deadline-project">${name}${timeStr ? ' · ⏱'+timeStr : ''}</div>
+                            <div class="deadline-project" style="color:${projInfo.color};">${projInfo.icon} ${name}${timeStr ? ' · ⏱'+timeStr : ''}</div>
                         </div>
                         <div class="deadline-time">${getRelativeTime(t.deadline)}</div>
                     </div>`;
@@ -2299,12 +2360,13 @@
             } else {
                 weekList.innerHTML = weekTasks.slice(0, 5).map(t => {
                     const name = t.projectName && t.projectName.trim() !== '' ? t.projectName : '个人任务';
+                    const projInfo = getProjectInfo(t.projectName);
                     const timeStr = formatTimeCost(t.timeCost, t.timeUnit);
                     return `<div class="deadline-item" onclick="editTask(${t.id})">
                         <div class="deadline-icon">${getCategoryInfo(t.category).icon}</div>
                         <div class="deadline-info">
                             <div class="deadline-task">${t.taskName}</div>
-                            <div class="deadline-project">${name}${timeStr ? ' · ⏱'+timeStr : ''}</div>
+                            <div class="deadline-project" style="color:${projInfo.color};">${projInfo.icon} ${name}${timeStr ? ' · ⏱'+timeStr : ''}</div>
                         </div>
                         <div class="deadline-time">${formatDate(t.deadline)}</div>
                     </div>`;
@@ -2313,9 +2375,27 @@
         }
 
         function updateProjectFilter() {
-            const projects = [...new Set(tasks.map(t => t.projectName && t.projectName.trim() !== '' ? t.projectName : '个人任务'))];
+            const projs = getProjects();
+            // Also include project names from existing tasks that aren't in the config
+            const taskProjects = [...new Set(tasks.map(t => t.projectName && t.projectName.trim() !== '' ? t.projectName : '').filter(Boolean))];
             const select = document.getElementById('filterProject');
-            select.innerHTML = '<option value="">全部项目</option>' + projects.map(p => `<option value="${p}">${p}</option>`).join('');
+            const currentVal = select.value;
+            select.innerHTML = '<option value="">全部项目</option>' + projs.map(p => `<option value="${p.key}">${p.icon} ${p.label}</option>`).join('');
+            // Add any task-only projects not in config
+            taskProjects.forEach(tp => {
+                if (!projs.find(p => p.key === tp || p.label === tp)) {
+                    select.innerHTML += `<option value="${tp}">📁 ${tp}</option>`;
+                }
+            });
+            select.value = currentVal;
+        }
+
+        function updateProjectSelect() {
+            const projs = getProjects();
+            const select = document.getElementById('projectName');
+            const currentVal = select.value;
+            select.innerHTML = '<option value="">个人任务</option>' + projs.map(p => `<option value="${p.key}">${p.icon} ${p.label}</option>`).join('');
+            select.value = currentVal;
         }
 
         function updateCategoryFilter() {
@@ -2462,11 +2542,11 @@
             const maxCatCount = Math.max(...catData.map(c => c.count), 1);
 
             const statusData = [
-                { key: 'completed', label: '已完成', color: '#7EC8A4', count: allTasks.filter(t => t.status === 'completed').length },
-                { key: 'progress', label: '进行中', color: '#81D4FA', count: allTasks.filter(t => t.status === 'progress').length },
-                { key: 'pending', label: '待处理', color: '#BDBDBD', count: allTasks.filter(t => t.status === 'pending').length },
-                { key: 'review', label: '待审核', color: '#CE93D8', count: allTasks.filter(t => t.status === 'review').length },
-                { key: 'delayed', label: '已延期', color: '#FF8A80', count: allTasks.filter(t => t.status === 'delayed').length }
+                { key: 'completed', label: '已完成', color: '#2E7D32', count: allTasks.filter(t => t.status === 'completed').length },
+                { key: 'progress', label: '进行中', color: '#0288D1', count: allTasks.filter(t => t.status === 'progress').length },
+                { key: 'pending', label: '待处理', color: '#9E9E9E', count: allTasks.filter(t => t.status === 'pending').length },
+                { key: 'review', label: '待审核', color: '#7B1FA2', count: allTasks.filter(t => t.status === 'review').length },
+                { key: 'delayed', label: '已延期', color: '#E53935', count: allTasks.filter(t => t.status === 'delayed').length }
             ].filter(s => s.count > 0);
 
             const weeklyData = [];
@@ -2548,10 +2628,10 @@
                             }).join('')}
                         </div>
                         <div style="display:flex;gap:16px;margin-top:10px;justify-content:center;">
-                            <div class="legend-item"><div class="legend-dot" style="background:var(--primary);"></div><span class="legend-label">完成</span></div>
-                            <div class="legend-item"><div class="legend-dot" style="background:#81D4FA;"></div><span class="legend-label">进行中</span></div>
-                            <div class="legend-item"><div class="legend-dot" style="background:var(--gray-300);"></div><span class="legend-label">待处理</span></div>
-                            <div class="legend-item"><div class="legend-dot" style="background:#FF8A80;"></div><span class="legend-label">延期</span></div>
+                            <div class="legend-item"><div class="legend-dot" style="background:#2E7D32;"></div><span class="legend-label">完成</span></div>
+                            <div class="legend-item"><div class="legend-dot" style="background:#0288D1;"></div><span class="legend-label">进行中</span></div>
+                            <div class="legend-item"><div class="legend-dot" style="background:#9E9E9E;"></div><span class="legend-label">待处理</span></div>
+                            <div class="legend-item"><div class="legend-dot" style="background:#E53935;"></div><span class="legend-label">延期</span></div>
                         </div>
                     </div>
                 </div>
@@ -2570,8 +2650,8 @@
                         <tr class="${t.status === 'completed' ? 'completed-row' : ''}">
                             <td>
                                 <div class="task-cell">
-                                    <div class="task-name">${t.priority === 'high' ? '<span style="color:#FF8A80;">🔥</span>' : ''}${t.taskName}</div>
-                                    ${hasProject ? `<div class="task-project-tag">📁 ${t.projectName}</div>` : ''}
+                                    <div class="task-name">${t.priority === 'high' ? '<span style="color:#E53935;">🔥</span>' : ''}${t.taskName}</div>
+                                    ${hasProject ? `<div class="task-project-tag" style="color:${getProjectInfo(t.projectName).color};">${getProjectInfo(t.projectName).icon} ${t.projectName}</div>` : ''}
                                     ${timeStr ? `<div class="task-time-tag">⏱ ${timeStr}</div>` : ''}
                                 </div>
                             </td>
@@ -2624,13 +2704,31 @@
             document.getElementById('timeCost').value = '';
             document.getElementById('timeUnit').value = 'h';
             updateCategorySelect();
+            updateProjectSelect();
 
             if (taskId) {
                 const task = tasks.find(t => t.id === taskId);
                 if (task) {
                     document.getElementById('modalTitle').textContent = '编辑任务';
                     document.getElementById('taskId').value = task.id;
-                    document.getElementById('projectName').value = task.projectName || '';
+                    // Resolve project name to key for select matching
+                    const projInfo = getProjectInfo(task.projectName);
+                    const projectSelect = document.getElementById('projectName');
+                    const projectVal = task.projectName || '';
+                    // Try to find matching option by key first, then by label, then by text content
+                    let matched = false;
+                    for (const opt of projectSelect.options) {
+                        if (opt.value === projInfo.key || opt.value === projectVal) {
+                            projectSelect.value = opt.value;
+                            matched = true;
+                            break;
+                        }
+                    }
+                    if (!matched && projectVal) {
+                        projectSelect.value = projectVal;
+                    } else if (!matched) {
+                        projectSelect.value = '';
+                    }
                     document.getElementById('taskName').value = task.taskName;
                     document.getElementById('category').value = task.category;
                     document.getElementById('status').value = task.status;
@@ -2667,8 +2765,16 @@
                 finalStatus = 'progress';
             }
 
+            const rawProject = document.getElementById('projectName').value.trim();
+            // Convert project key back to label for storage (backward compat)
+            let resolvedProjectName = rawProject;
+            if (rawProject) {
+                const projInfo = getProjectInfo(rawProject);
+                resolvedProjectName = projInfo.label || rawProject;
+            }
+
             const taskData = {
-                projectName: document.getElementById('projectName').value.trim(),
+                projectName: resolvedProjectName,
                 taskName: document.getElementById('taskName').value.trim(),
                 category: document.getElementById('category').value,
                 status: finalStatus,
@@ -2816,6 +2922,60 @@
             showToast('职位配置已保存 ✅', 'success');
         }
 
+        // ===== Project Config =====
+        function openProjectConfig() {
+            const overlay = document.getElementById('projectConfigOverlay');
+            const list = document.getElementById('projectConfigList');
+            const projs = getProjects();
+            list.innerHTML = projs.map(p => `
+                <div class="category-config-item" data-key="${p.key}">
+                    <input type="text" class="emoji-input" value="${p.icon}" placeholder="📁" title="图标">
+                    <input type="text" class="cat-label-input" value="${p.label}" placeholder="项目名称">
+                    <div style="position:relative;display:inline-block;">
+                        <div class="cat-color-btn" style="background:${p.color};" onclick="this.nextElementSibling.click()" title="点击选择颜色"></div>
+                        <input type="color" class="cat-color-input" value="${p.color}" onchange="this.previousElementSibling.style.background=this.value;" title="颜色">
+                    </div>
+                    <button class="remove-cat-btn" onclick="this.parentElement.remove()">✕</button>
+                </div>
+            `).join('');
+            overlay.classList.add('active');
+        }
+        function closeProjectConfig() { document.getElementById('projectConfigOverlay').classList.remove('active'); }
+        function addProjectRow() {
+            const list = document.getElementById('projectConfigList');
+            const div = document.createElement('div');
+            div.className = 'category-config-item';
+            div.innerHTML = `
+                <input type="text" class="emoji-input" value="📁" placeholder="📁" title="图标">
+                <input type="text" class="cat-label-input" value="" placeholder="新项目名称">
+                <div style="position:relative;display:inline-block;">
+                    <div class="cat-color-btn" style="background:#78909C;" onclick="this.nextElementSibling.click()" title="点击选择颜色"></div>
+                    <input type="color" class="cat-color-input" value="#78909C" onchange="this.previousElementSibling.style.background=this.value;" title="颜色">
+                </div>
+                <button class="remove-cat-btn" onclick="this.parentElement.remove()">✕</button>
+            `;
+            list.appendChild(div);
+        }
+        function saveProjectConfig() {
+            const items = document.querySelectorAll('#projectConfigList .category-config-item');
+            const newProjs = [];
+            items.forEach(item => {
+                const icon = item.querySelector('.emoji-input').value.trim() || '📁';
+                const label = item.querySelector('.cat-label-input').value.trim();
+                const colorInput = item.querySelector('.cat-color-input');
+                const color = colorInput ? colorInput.value : '#78909C';
+                if (label) {
+                    const existingKey = item.dataset.key;
+                    newProjs.push({ key: existingKey || generateProjectKey(label), label, icon, color });
+                }
+            });
+            projects = newProjs;
+            localStorage.setItem('gameOps_projects', JSON.stringify(projects));
+            updateProjectSelect(); updateProjectFilter(); renderTasks();
+            closeProjectConfig();
+            showToast('项目配置已保存 ✅', 'success');
+        }
+
         // ===== Toast =====
         function showToast(message, type = 'info') {
             const container = document.getElementById('toastContainer');
@@ -2864,6 +3024,10 @@
             if (storedRoles) {
                 try { roles = JSON.parse(storedRoles); } catch (e) {}
             }
+            const storedProjs = localStorage.getItem('gameOps_projects');
+            if (storedProjs) {
+                try { projects = JSON.parse(storedProjs); } catch (e) {}
+            }
             const storedRole = localStorage.getItem('gameOps_currentRole');
             if (storedRole) currentRole = storedRole;
             const storedSound = localStorage.getItem('gameOps_soundEnabled');
@@ -2892,8 +3056,9 @@
         document.getElementById('modalOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
         document.getElementById('categoryConfigOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeCategoryConfig(); });
         document.getElementById('roleConfigOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeRoleConfig(); });
+        document.getElementById('projectConfigOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeProjectConfig(); });
         document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') { closeModal(); closeCategoryConfig(); closeRoleConfig(); }
+            if (e.key === 'Escape') { closeModal(); closeCategoryConfig(); closeRoleConfig(); closeProjectConfig(); }
             if (e.key === 'n' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); openModal(); }
         });
 
@@ -2907,6 +3072,7 @@
         updateRoleSelect();
         updateCategorySelect();
         updateCategoryFilter();
+        updateProjectSelect();
         renderTasks();
         updateStats();
         updateDateDisplay();
