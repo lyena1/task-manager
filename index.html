@@ -613,9 +613,7 @@
         .tooltip-trigger { position: relative; cursor: default; }
         .task-tooltip {
             display: none;
-            position: absolute; z-index: 500;
-            left: 0; top: 100%;
-            margin-top: 6px;
+            position: fixed; z-index: 500;
             background: var(--bg-header);
             border: none;
             border-radius: var(--radius-sm);
@@ -625,21 +623,21 @@
             font-size: 0.82rem;
             line-height: 1.6;
             color: rgba(255,255,255,0.88);
-            animation: tooltipIn 0.2s ease;
+            animation: tooltipIn 0.15s ease;
             pointer-events: none;
-        }
-        .task-tooltip.tooltip-above {
-            /* 当下方空间不足时，tooltip 显示在上方 */
-            animation: tooltipInUp 0.2s ease;
-        }
-        @keyframes tooltipInUp {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
+            /* 防止被任何父容器 overflow 裁切 */
         }
         .task-tooltip.show { display: block; }
         @keyframes tooltipIn {
             from { opacity: 0; transform: translateY(-4px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes tooltipInUp {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .task-tooltip.tooltip-above {
+            animation: tooltipInUp 0.15s ease;
         }
         .tooltip-header {
             font-weight: 700; color: white;
@@ -2146,35 +2144,44 @@
                 ${timeStr ? `<div class="tooltip-row"><span class="tooltip-label">耗时</span><span class="tooltip-value">⏱ ${timeStr}</span></div>` : ''}
                 ${task.notes ? `<div class="tooltip-notes">${task.notes}</div>` : ''}
             `;
-            // 智能定位：检测元素在视口中的位置，底部空间不足时显示在上方
+
+            // 使用 fixed 定位，基于鼠标事件的视口坐标，彻底避免容器 overflow 裁切
             tip.classList.remove('tooltip-above');
-            tip.style.top = '';
-            tip.style.bottom = '';
             tip.classList.add('show');
 
-            // 等 DOM 渲染后计算位置
+            // 先让 tooltip 渲染以获取尺寸
             requestAnimationFrame(() => {
-                const triggerEl = tip.parentElement;
                 const tipRect = tip.getBoundingClientRect();
-                const triggerRect = triggerEl.getBoundingClientRect();
+                const viewportWidth = window.innerWidth;
                 const viewportHeight = window.innerHeight;
-                const spaceBelow = viewportHeight - triggerRect.bottom;
-                const spaceAbove = triggerRect.top;
 
-                // 如果下方空间不足以容纳 tooltip，且上方空间足够，则显示在上方
-                if (spaceBelow < tipRect.height + 8 && spaceAbove > tipRect.height + 8) {
-                    tip.classList.add('tooltip-above');
-                    tip.style.bottom = '100%';
-                    tip.style.top = 'auto';
-                    tip.style.marginBottom = '6px';
-                    tip.style.marginTop = '0';
-                } else {
-                    tip.classList.remove('tooltip-above');
-                    tip.style.top = '100%';
-                    tip.style.bottom = 'auto';
-                    tip.style.marginTop = '6px';
-                    tip.style.marginBottom = '0';
+                // 基于鼠标坐标定位
+                let left = event.clientX + 10;
+                let top = event.clientY + 12;
+
+                // 水平方向：右边溢出时左移
+                if (left + tipRect.width > viewportWidth - 10) {
+                    left = event.clientX - tipRect.width - 10;
                 }
+                // 确保不超出左边
+                if (left < 10) left = 10;
+
+                // 垂直方向：下方空间不足时翻转到上方
+                const spaceBelow = viewportHeight - event.clientY;
+                const spaceAbove = event.clientY;
+
+                if (spaceBelow < tipRect.height + 16 && spaceAbove > tipRect.height + 16) {
+                    // 翻转到上方
+                    top = event.clientY - tipRect.height - 12;
+                    tip.classList.add('tooltip-above');
+                } else if (spaceBelow < tipRect.height + 16) {
+                    // 上下都不够，尽量放在上方（至少能看到开头）
+                    top = Math.max(10, event.clientY - tipRect.height - 12);
+                    tip.classList.add('tooltip-above');
+                }
+
+                tip.style.left = left + 'px';
+                tip.style.top = top + 'px';
             });
         }
         function hideTooltip() {
