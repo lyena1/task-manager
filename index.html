@@ -628,6 +628,14 @@
             animation: tooltipIn 0.2s ease;
             pointer-events: none;
         }
+        .task-tooltip.tooltip-above {
+            /* 当下方空间不足时，tooltip 显示在上方 */
+            animation: tooltipInUp 0.2s ease;
+        }
+        @keyframes tooltipInUp {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         .task-tooltip.show { display: block; }
         @keyframes tooltipIn {
             from { opacity: 0; transform: translateY(-4px); }
@@ -2131,14 +2139,43 @@
                 <div class="tooltip-header">${task.priority === 'high' ? '🔥 ' : ''}${task.taskName}</div>
                 <div class="tooltip-row"><span class="tooltip-label">项目</span><span class="tooltip-value" style="color:${projInfo.color};font-weight:500;">${projInfo.icon} ${task.projectName || '个人任务'}</span></div>
                 <div class="tooltip-row"><span class="tooltip-label">类型</span><span class="tooltip-value" style="color:${catInfo.color};">${catInfo.icon} ${catInfo.label}</span></div>
-                <div class="tooltip-row"><span class="tooltip-label">优先级</span><span class="tooltip-value" style="color:${task.priority === 'high' ? '#E53935' : task.priority === 'medium' ? '#F57C00' : '#43A047'};font-weight:600;">${priorityLabels[task.priority]}</span></div>
+                <div class="tooltip-row"><span class="tooltip-label">优先级</span><span class="tooltip-value" style="color:${task.priority === 'high' ? '#E17055' : task.priority === 'medium' ? '#F39C12' : '#00B894'};font-weight:600;">${priorityLabels[task.priority]}</span></div>
                 <div class="tooltip-row"><span class="tooltip-label">进度</span><span class="tooltip-value">${task.progress}%</span></div>
                 <div class="tooltip-row"><span class="tooltip-label">截止</span><span class="tooltip-value">${formatDate(task.deadline)} (${getRelativeTime(task.deadline)})</span></div>
                 <div class="tooltip-row"><span class="tooltip-label">状态</span><span class="tooltip-value">${statusLabels[task.status]}</span></div>
                 ${timeStr ? `<div class="tooltip-row"><span class="tooltip-label">耗时</span><span class="tooltip-value">⏱ ${timeStr}</span></div>` : ''}
                 ${task.notes ? `<div class="tooltip-notes">${task.notes}</div>` : ''}
             `;
+            // 智能定位：检测元素在视口中的位置，底部空间不足时显示在上方
+            tip.classList.remove('tooltip-above');
+            tip.style.top = '';
+            tip.style.bottom = '';
             tip.classList.add('show');
+
+            // 等 DOM 渲染后计算位置
+            requestAnimationFrame(() => {
+                const triggerEl = tip.parentElement;
+                const tipRect = tip.getBoundingClientRect();
+                const triggerRect = triggerEl.getBoundingClientRect();
+                const viewportHeight = window.innerHeight;
+                const spaceBelow = viewportHeight - triggerRect.bottom;
+                const spaceAbove = triggerRect.top;
+
+                // 如果下方空间不足以容纳 tooltip，且上方空间足够，则显示在上方
+                if (spaceBelow < tipRect.height + 8 && spaceAbove > tipRect.height + 8) {
+                    tip.classList.add('tooltip-above');
+                    tip.style.bottom = '100%';
+                    tip.style.top = 'auto';
+                    tip.style.marginBottom = '6px';
+                    tip.style.marginTop = '0';
+                } else {
+                    tip.classList.remove('tooltip-above');
+                    tip.style.top = '100%';
+                    tip.style.bottom = 'auto';
+                    tip.style.marginTop = '6px';
+                    tip.style.marginBottom = '0';
+                }
+            });
         }
         function hideTooltip() {
             document.querySelectorAll('.task-tooltip.show').forEach(t => t.classList.remove('show'));
@@ -2170,22 +2207,8 @@
                 }
                 tbody.innerHTML = html;
             } else if (currentTab === 'next') {
-                // 区分下周截止 vs 本周顺延
-                let nextWeekTasks = sorted.filter(t => isInWeek(t.deadline, 1));
-                let carriedTasks = sorted.filter(t => !isInWeek(t.deadline, 1));
-                let html = '';
-                if (nextWeekTasks.length > 0) {
-                    html += nextWeekTasks.map(t => buildTaskRow(t)).join('');
-                }
-                if (carriedTasks.length > 0) {
-                    html += `
-                        <tr class="week-divider"><td colspan="8">
-                            <div class="week-divider-text">⏩ 本周顺延 <span style="font-weight:400;color:var(--gray-400);font-size:0.68rem;">（本周未完成自动顺延至下周）</span></div>
-                        </td></tr>
-                    `;
-                    html += carriedTasks.map(t => buildTaskRow(t)).join('');
-                }
-                tbody.innerHTML = html;
+                // 下周工作：只显示下周截止的任务（顺延逻辑在周一时由 autoCarryOver 处理）
+                tbody.innerHTML = sorted.map(t => buildTaskRow(t)).join('');
             } else {
                 tbody.innerHTML = sorted.map(t => buildTaskRow(t)).join('');
             }
@@ -2255,20 +2278,15 @@
         function renderTasks() {
             let filteredTasks = [];
             if (currentTab === 'current') {
+                // 本周工作：只显示本周截止的任务 + 截止日期在本周之后的任务
                 filteredTasks = tasks.filter(t => {
                     return isInWeek(t.deadline, 0) || isAfterWeek(t.deadline, 0);
                 });
                 document.getElementById('sectionTitleText').textContent = '本周工作';
             } else if (currentTab === 'next') {
-                // 下周工作 = 下周截止的任务 + 本周未完成的任务（自动顺延）
-                const thisWeekIncomplete = tasks.filter(t => {
-                    return isInWeek(t.deadline, 0) && t.status !== 'completed';
-                });
-                const nextWeekTasks = tasks.filter(t => isInWeek(t.deadline, 1));
-                // 合并去重
-                const nextWeekIds = new Set(nextWeekTasks.map(t => t.id));
-                const carriedOver = thisWeekIncomplete.filter(t => !nextWeekIds.has(t.id));
-                filteredTasks = [...nextWeekTasks, ...carriedOver];
+                // 下周工作 = 下周截止的任务
+                // 本周未完成的任务只有在「下周一」才会自动顺延到下周，当前查看下周时只显示下周自身截止的任务
+                filteredTasks = tasks.filter(t => isInWeek(t.deadline, 1));
                 document.getElementById('sectionTitleText').textContent = '下周工作';
             } else if (currentTab === 'archive') {
                 filteredTasks = tasks.filter(t => isInWeek(t.deadline, currentWeekOffset));
@@ -2306,12 +2324,7 @@
             if (currentTab === 'current') {
                 relevantTasks = tasks.filter(t => isInWeek(t.deadline, 0) || isAfterWeek(t.deadline, 0));
             } else if (currentTab === 'next') {
-                // 与 renderTasks 保持一致：含顺延任务
-                const thisWeekIncomplete = tasks.filter(t => isInWeek(t.deadline, 0) && t.status !== 'completed');
-                const nextWeekTasks = tasks.filter(t => isInWeek(t.deadline, 1));
-                const nextWeekIds = new Set(nextWeekTasks.map(t => t.id));
-                const carriedOver = thisWeekIncomplete.filter(t => !nextWeekIds.has(t.id));
-                relevantTasks = [...nextWeekTasks, ...carriedOver];
+                relevantTasks = tasks.filter(t => isInWeek(t.deadline, 1));
             } else {
                 relevantTasks = tasks.filter(t => isInWeek(t.deadline, currentWeekOffset));
             }
@@ -3051,6 +3064,45 @@
 
         // ===== Initialize =====
         if (!loadFromStorage()) initDefaultData();
+
+        // ===== Auto Carry-Over: 下周一自动顺延本周未完成任务 =====
+        function autoCarryOver() {
+            const now = new Date(); now.setHours(0, 0, 0, 0);
+            const dayOfWeek = now.getDay(); // 0=周日, 1=周一
+            // 只在周一执行顺延
+            if (dayOfWeek !== 1) return;
+
+            const carryOverKey = 'gameOps_lastCarryOver';
+            const lastCarryOver = localStorage.getItem(carryOverKey);
+            const todayStr = now.toISOString().split('T')[0];
+
+            // 防止同一天重复顺延
+            if (lastCarryOver === todayStr) return;
+
+            // 上周未完成的任务：截止日期在上周且状态非completed
+            const lastWeek = getWeekRange(-1);
+            const incompleteTasks = tasks.filter(t => {
+                if (t.status === 'completed') return false;
+                const d = new Date(t.deadline); d.setHours(0, 0, 0, 0);
+                return d >= lastWeek.start && d <= lastWeek.end;
+            });
+
+            if (incompleteTasks.length > 0) {
+                // 将这些任务的截止日期设为本周五（给一周缓冲）
+                const thisWeekFriday = new Date(now);
+                thisWeekFriday.setDate(now.getDate() + (5 - 1)); // 周一+4=周五
+                const newDeadline = thisWeekFriday.toISOString().split('T')[0];
+
+                incompleteTasks.forEach(t => {
+                    t.deadline = newDeadline;
+                });
+
+                localStorage.setItem(carryOverKey, todayStr);
+                saveToStorage();
+                showToast(`${incompleteTasks.length} 个未完成任务已自动顺延至本周`, 'info');
+            }
+        }
+        autoCarryOver();
 
         document.getElementById('soundToggle').textContent = soundEnabled ? '🔔' : '🔕';
         document.getElementById('soundToggle').classList.toggle('muted', !soundEnabled);
